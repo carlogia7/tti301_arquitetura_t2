@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: barramento-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: barramento
+  template:
+    metadata:
+      labels:
+        app: barramento
+    spec:
+      containers:
+        - name: barramento
+          image: tti301_mss_barramento
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: barramento-service
+spec:
+  selector:
+    app: barramento
+  type: ClusterIP
+  ports:
+    - name: barramento
+      protocol: TCP
+      port: 10000
+      targetPort: 10000

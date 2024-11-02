@@ -41,7 +41,7 @@ app.post('/eventos', (req, res) => {
 
 app.listen(6000, async () => {
     console.log(`Consulta. 6000`)
-    const resp = await axios.get('http://localhost:10000/eventos')
+    const resp = await axios.get('http://barramento-service:10000/eventos')
     resp.data.forEach((valor, indice, colecao) => {
       try {
         funcoes[valor.type](valor.payload)

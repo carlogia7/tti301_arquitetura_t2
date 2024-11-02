@@ -16,7 +16,7 @@ const funcoes = {
     const observacoes = observacoesPorLembrete[observacao.lembreteId]
     const obsParaAtualizar = observacoes.find(o => o.id === observacao.id)
     obsParaAtualizar.status = observacao.status
-    axios.post('http://localhost:10000/eventos', {
+    axios.post('http://barramento-service:10000/eventos', {
       type: "ObservacaoAtualizada",
       payload: {
         id: observacao.id,
@@ -46,7 +46,7 @@ app.post('/lembretes/:idLembrete/observacoes', async function(req, res){
     //indexar a base geral de idLembrete e associar a coleção de observações
     observacoesPorLembrete[req.params.idLembrete] = observacoesDoLembrete
     // HATEOAS
-    await axios.post("http://localhost:10000/eventos", {
+    await axios.post("http://barramento-service:10000/eventos", {
       type: "ObservacaoCriada",
       payload: {
         id: idObservacacao,
